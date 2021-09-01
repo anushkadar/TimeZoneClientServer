@@ -1,0 +1,14 @@
+version: "3.1"
+services:
+  db:
+    image: postgres:12.7
+    container_name: postgres_12
+    ports:
+      - "5432:5432"
+#    volumes:
+#      - ./db:/docker-entrypoint-initdb.d/
+    environment:
+      - POSTGRES_DB=samle_db
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - TZ=UTC

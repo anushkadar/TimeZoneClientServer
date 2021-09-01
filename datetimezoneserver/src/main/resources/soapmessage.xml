@@ -1,0 +1,17 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Header>
+        <AuthHeader xmlns="http://tempuri.org/">
+            <UserId/>
+            <Password/>
+            <Source>TrimbleD2M</Source>
+            <MessageId>2</MessageId>
+            <VerificationId>VERIFICATIONID</VerificationId>
+        </AuthHeader>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <Allocations xmlns="http://tempuri.org/">
+            <request>
+                <![CDATA[<AllocationRequest><Data><Set Type='L' Id='165003' ><Vehicle Type='C' Id='58803' /><Vehicle Type='C' Id='58836' /></Set><Allocation Sequence='1' TrainOriginDateTime='2021-06-03T06:04:00' TrainOriginLocation='BNBR' WTTID='1H01' DiagramDate='2021-06-03T00:00:00' DiagramNo='AS.601' Type='A' TrainDestLocation='AYLSBRY' TrainDestDateTime='2021-06-03T18:28:00' AllocOriginLocation='BNBR' AllocOriginDateTime='2021-06-03T06:04:00' AllocOriginMiles='0' AllocDestLocation='AYLSBRY' AllocDestDateTime='2021-06-03T18:28:00' AllocDestMiles='11' /></Data></AllocationRequest>]]></request>
+        </Allocations>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

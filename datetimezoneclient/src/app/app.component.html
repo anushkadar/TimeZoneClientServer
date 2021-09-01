@@ -1,0 +1,98 @@
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+  <img width="40" alt="Angular Logo"
+    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==" />
+
+  <span>{{currentDate | date: "yyyy-mm-dd"}} {{currentDate | date: "HH:mm:ss"}}</span>
+  <div class="spacer"></div>
+</div>
+
+<div class="content" role="main">
+
+  <div class="row">
+    <div class="col-4 form-group" style="padding-top: 28px;">
+      <input type="text" [(ngModel)]="myDate" class="form-control" #dp="bsDatepicker" bsDatepicker>
+    </div>
+    <div class="col-4 form-group">
+      <timepicker [(ngModel)]="myTime" (ngModelChange)="timeChanged()" [showMeridian]="false" [showSeconds]="true" [hourStep]="hstep"
+        [minuteStep]="mstep" [secondsStep]="sstep"></timepicker>
+    </div>
+  </div>
+  <div class="row" style="padding-top: 5px;">
+    <div class="col-2 form-group">
+      <button type="button" class="btn btn-primary" (click)="saveJpa()"> submit with jpa</button>
+    </div>
+    <div class="col-3 form-group">
+      <button type="button" class="btn btn-primary" (click)="saveJdbcTemplate()">submit with jdbcTemplate</button>
+    </div>
+    <div class="col-3 form-group">
+      <button type="button" class="btn btn-primary" (click)="savejdbc()"> submit with jdbc </button>
+    </div>
+  </div>
+  <div class="row" style="padding-top: 10px;">
+    <div class="col-md-12 form-group">
+      <pre class="alert alert-info">Time is: {{myDate}}</pre>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">TimeZone</th>
+        <th scope="col">Client Time</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Client Time</th>
+        <td>{{angularDate}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Client Time (piped)</th>
+        <td>{{pipedDate}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Client Time UTC</th>
+        <td>{{utcTime}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Sever time Date as String</th>
+        <td>{{dateStr}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Sever Date</th>
+        <td>{{date1}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Sever Localtime</th>
+        <td>{{date2}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Sever Localdate</th>
+        <td>{{date3}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Sever LocalDatetime Dt</th>
+        <td>{{date4}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Sever LocalDatetime Ts</th>
+        <td>{{date5}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Sever OffsetDateTime</th>
+        <td>{{date6}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Sever ZonedDateTime</th>
+        <td>{{date7}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- Footer -->
+<footer>
+</footer>
