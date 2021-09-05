@@ -17,13 +17,13 @@ export class AppComponent {
   utcTime: String;
   pipedDate: String | null;
   dateStr: String | null;
-  date1: Date | null;
+  date1: any | null;
   date2: String | null;
   date3: Date | String | null;
-  date4: Date | null;
-  date5: Date | null;
-  date6: Date | null;
-  date7: Date | null;
+  date4: any | null;
+  date5: any | null;
+  date6: any | null;
+  date7: any | null;
 
 
            myTime: Date ;
@@ -48,7 +48,6 @@ export class AppComponent {
     this.angularDate = this.myTime;
     this.utcTime = this.angularDate.toUTCString();
     this.pipedDate = datepipe.transform(this.angularDate, 'yyyy-MM-d H:mm:ssZZZZ');
-
 
 
     let data: Data = new Data();
@@ -138,15 +137,19 @@ export class AppComponent {
   }
 
   private populateResult(result: Data): void {
-    this.title = result.dateStr;
     this.dateStr = result.dateStr;
     this.date1 = result.date;
+    this.date1 = this.datepipe.transform(result.localDateTimeDt, 'yyyy-MM-d, H:mm:ss zzzz');
     this.date2 = result.localTime;
     this.date3 = result.localDate;
     this.date4 = result.localDateTimeDt;
+    this.date4 = this.datepipe.transform(result.localDateTimeDt, 'yyyy-MM-d, H:mm:ss zzzz');
     this.date5 = result.localDateTimeTs;
-    this.date6 = result.offsetDateTime; //this.datepipe.transform(result.offsetDateTime, 'yyyy-MM-d, H:mm:ss zzzz');
+    this.date5 = this.datepipe.transform(result.localDateTimeTs, 'yyyy-MM-d, H:mm:ss zzzz');
+    this.date6 = result.offsetDateTime;
+    this.date6 = this.datepipe.transform(result.offsetDateTime, 'yyyy-MM-d, H:mm:ss zzzz');
     this.date7 = result.zonedDateTime;
+    this.date7 = this.datepipe.transform(result.zonedDateTime, 'yyyy-MM-d, H:mm:ss zzzz');
   };
 
   private populateError(error: Error) {
