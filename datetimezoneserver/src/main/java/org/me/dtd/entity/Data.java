@@ -31,6 +31,7 @@ public class Data implements Serializable {
     private LocalTime localTime;
     @Column(name = "local_Date")
     private LocalDate localDate;
+    //forcing jackson to include timezone
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     @Column(name = "local_datetime_dt")
     private LocalDateTime localDateTimeDt;

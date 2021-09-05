@@ -2,6 +2,7 @@ package org.me.dtd.repository;
 
 import org.me.dtd.entity.Data;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -13,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.SQLType;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.sql.Types;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -43,7 +45,7 @@ public class DateTimeJdbcDao {
 
     public Connection getSqlConnection() throws ClassNotFoundException, SQLException {
         String driver = "com.mysql.cj.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/samle_db";
+        String url = "jdbc:mysql://localhost:3306/sample_db";
         String username = "root";
         String password = "password";
         Class.forName(driver);
@@ -53,26 +55,25 @@ public class DateTimeJdbcDao {
 
     public static Connection getPostgresConnection() throws ClassNotFoundException, SQLException {
         String driver = "org.postgresql.Driver";
-        String url = "jdbc:postgresql://localhost:5432/samle_db";
+        String url = "jdbc:postgresql://localhost:5432/sample_db";
         String username = "root";
         String password = "password";
         Class.forName(driver);
         return DriverManager.getConnection(url, username, password);
     }
 
-
     public Data save(Data data) {
         try {
             conn = getConnection();
             preparedStatement = conn.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setObject(1, data.getDateStr());
-            preparedStatement.setObject(2, data.getDate());
+            preparedStatement.setObject(2, data.getDate(), Types.DATE);
             preparedStatement.setObject(3, data.getLocalTime());
             preparedStatement.setObject(4, data.getLocalDate());
             preparedStatement.setObject(5, data.getLocalDateTimeDt());
             preparedStatement.setObject(6, data.getLocalDateTimeTs());
             preparedStatement.setObject(7, data.getOffsetDateTime());
-            preparedStatement.setObject(8, data.getZonedDateTime());
+            preparedStatement.setObject(8, data.getZonedDateTime().toOffsetDateTime());
             // Execute statement and return the number of rows affected
             preparedStatement.executeUpdate();
 

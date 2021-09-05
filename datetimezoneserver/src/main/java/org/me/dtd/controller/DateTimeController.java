@@ -80,9 +80,10 @@ public class DateTimeController {
         return new ResponseEntity<>(localDateTime, HttpStatus.OK);
     }
 
-    @PostMapping("/post-data1")
-    public ResponseEntity<Data> saveData1(@RequestBody Data data) {
-        out.println(Instant.now());
+    @PostMapping("/save-springData")
+    public ResponseEntity<Data> saveWithJpa(@RequestBody Data data) {
+        out.println("\n---------------------Spring-data---------------------");
+        printTimes();
         out.println(data.toString());
         Data persistData = dateTimeService.saveJpa(data);
         out.println(persistData.toString());
@@ -90,19 +91,28 @@ public class DateTimeController {
 
     }
 
-    @PostMapping("/post-data2")
-    public ResponseEntity<Data> saveData2(@RequestBody Data data) {
+    @PostMapping("/save-jdbcTemplate")
+    public ResponseEntity<Data> saveWIthJdbcTemplate(@RequestBody Data data) {
+        out.println("\n---------------------Spring-jdbcTemplate---------------------");
+        printTimes();
         out.println(data.toString());
         Data persistData = dateTimeService.saveJdbcTemplate(data);
         out.println(persistData.toString());
         return new ResponseEntity<>(persistData, HttpStatus.OK);
     }
 
-    @PostMapping("/post-data3")
-    public ResponseEntity<Data> saveData3(@RequestBody Data data) {
+    @PostMapping("/save-jdbc")
+    public ResponseEntity<Data> saveWithPlanJDBC(@RequestBody Data data) {
+        out.println("\n---------------------Plain JDBC---------------------");
+        printTimes();
         out.println(data.toString());
         Data persistData = dateTimeService.saveJdbc(data);
         out.println(persistData.toString());
         return new ResponseEntity<>(persistData, HttpStatus.OK);
+    }
+
+    void printTimes(){
+//        out.println("UCT - \t\t\t\t" + Instant.now());
+//        out.println("Server local time - " + ZonedDateTime.now());
     }
 }

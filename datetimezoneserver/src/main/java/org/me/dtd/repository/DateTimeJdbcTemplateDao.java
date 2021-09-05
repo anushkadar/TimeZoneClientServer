@@ -2,8 +2,6 @@ package org.me.dtd.repository;
 
 import org.me.dtd.entity.Data;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
@@ -29,23 +27,15 @@ public class DateTimeJdbcTemplateDao extends JdbcTemplate {
     }
 
     public Data save2(Data data) {
-        PreparedStatementCreator psc = con -> {
-            PreparedStatement ps = con.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS);
-            PreparedStatementSetter psSetter = newArgPreparedStatementSetter(
-                    new Object[] { data.getDateStr(), data.getDate(), data.getLocalTime(), data.getLocalDate(),
-                            data.getLocalDateTimeDt(), data.getLocalDateTimeTs(), data.getOffsetDateTime(), data.getZonedDateTime() });
-            psSetter.setValues(ps);
-            return ps;
-        };
-        GeneratedKeyHolder generatedKeyHolder = new GeneratedKeyHolder();
-        update(psc, generatedKeyHolder);
-        Integer dataId = generatedKeyHolder.getKey().intValue();
+        Integer dataId = update(INSERT_SQL,
+                new Object[] { data.getDateStr(), data.getDate(), data.getLocalTime(), data.getLocalDate(),
+                        data.getLocalDateTimeDt(), data.getLocalDateTimeTs(), data.getOffsetDateTime(),
+                        data.getZonedDateTime() });
         data.setId(dataId);
         return data;
     }
 
     public Data save(Data data) {
-
         KeyHolder holder = new GeneratedKeyHolder();
         update(connection -> {
             PreparedStatement ps = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS);
@@ -55,12 +45,17 @@ public class DateTimeJdbcTemplateDao extends JdbcTemplate {
             ps.setObject(4, data.getLocalDate());
             ps.setObject(5, data.getLocalDateTimeDt());
             ps.setObject(6, data.getLocalDateTimeTs());
-            ps.setObject(7, data.getOffsetDateTime().toString());
-            ps.setObject(8, data.getZonedDateTime().toLocalDateTime());
+            ps.setObject(7, data.getOffsetDateTime());
+            ps.setObject(8, data.getZonedDateTime().toOffsetDateTime());
             return ps;
         }, holder);
 
-        int newUserId = holder.getKey().intValue();
+        int newUserId;
+        if (holder.getKeys().size() > 1) {
+            newUserId = (int) holder.getKeys().get("id");
+        } else {
+            newUserId = holder.getKey().intValue();
+        }
         data.setId(newUserId);
         return data;
     }
