@@ -9,6 +9,4 @@ export class Data {
   zonedDateTime: Date;
   data: Data;
 
-
-
 }

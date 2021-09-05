@@ -13,9 +13,9 @@ export class TimeService {
 
   constructor(private http: HttpClient) {
     this.usersUrl = 'http://localhost:8080/get';
-    this.postJpaUrl = 'http://localhost:8080/post-springData';
-    this.postJdbcTemplateUrl = 'http://localhost:8080/post-jdbcTemplate';
-    this.postJdbcUrl = 'http://localhost:8080/post-jdbc';
+    this.postJpaUrl = 'http://localhost:8080/save-springData';
+    this.postJdbcTemplateUrl = 'http://localhost:8080/save-jdbcTemplate';
+    this.postJdbcUrl = 'http://localhost:8080/save-jdbc';
   }
 
   public find(): Observable<Data> {
