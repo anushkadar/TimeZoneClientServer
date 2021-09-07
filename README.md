@@ -1,4 +1,4 @@
-# Find complete guide with bellow link to run the application 
+# find step by Step explaination bellow
 https://medium.com/@anushkadarr/practical-approach-to-java-rest-api-timezone-handling-with-angular-springboot-mysql-42396e823787
 
 ![clientLook](https://user-images.githubusercontent.com/2859878/132262407-e560ce9c-999c-4bc2-af32-9f34d69938a4.png)
